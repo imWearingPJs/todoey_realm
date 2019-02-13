@@ -6,10 +6,12 @@
 //  Copyright © 2019 Michael Kozub. All rights reserved.
 //
 
-import Foundation
+//import Foundation
+//
+//class Item: Codable {
+//
+//    var title : String?
+//    var done: Bool = false
+//}
 
-class Item: Codable {
-    
-    var Title : String?
-    var Done: Bool = false
-}
+//commented this out after we created our core data data model
