@@ -74,18 +74,9 @@ class TodoListViewController: UITableViewController {
         
     }
     
-//    func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest()) {//with is the external parameter
-//        //Item.fetchRequest() is the default if no param is sent
-//
-//        do {
-//            itemArray = try context.fetch(request)
-//        } catch {
-//            print("Error fetching data from context \(error)")
-//        }
-//    }
-    
     func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest()) {
-        //let request : NSFetchRequest<Item> = Item.fetchRequest()
+        //with keyword is an external parameter
+        //Item.fetchRequest() is the default if we call this method without any params
         do {
             itemArray = try context.fetch(request)
         } catch {
@@ -105,23 +96,37 @@ class TodoListViewController: UITableViewController {
         self.tableView.reloadData()
     }
     
-
 }
 
 //MARK Search bar methods
 extension TodoListViewController : UISearchBarDelegate {
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+//        
+//        let request : NSFetchRequest<Item> = Item.fetchRequest()
+//
+//        request.predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
+//
+//        request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+//        
+//        print(searchBar.text!)
+//
+//        loadItems(with: request)
+//        
+//    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print(searchBar.text)
         
-        let request : NSFetchRequest<Item> = Item.fetchRequest()
+        if searchBar.text!.count > 0 {
+            let request : NSFetchRequest<Item> = Item.fetchRequest()
+            request.predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
+            request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+            print(searchBar.text!)
+            loadItems(with: request)
+        } else {
+            loadItems()
+        }
 
-        request.predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
-
-        request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
-        
-        print(searchBar.text!)
-
-        loadItems(with: request)
-        
     }
 }
