@@ -88,10 +88,4 @@ class CategoryViewController: UITableViewController {
         self.tableView.reloadData()
     }
     
-    //MARK-- TableView Datasource methods
-    
-    //MARK-- TableView Delegate methods
-    
-    //MARK-- Data manipulation methods
-    
 }
