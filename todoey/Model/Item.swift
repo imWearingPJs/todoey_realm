@@ -6,12 +6,11 @@
 //  Copyright © 2019 Michael Kozub. All rights reserved.
 //
 
-//import Foundation
-//
-//class Item: Codable {
-//
-//    var title : String?
-//    var done: Bool = false
-//}
+import Foundation
+import RealmSwift
 
-//commented this out after we created our core data data model
+class Item: Object {
+    @objc dynamic var title : String = ""
+    @objc dynamic var done: Bool = false
+    var parentCategory = LinkingObjects(fromType: Category.self, property: "items")
+}
