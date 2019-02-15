@@ -45,10 +45,17 @@ class TodoListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        //itemResults[indexPath.row].done = !itemResults[indexPath.row].done
+        if let item = itemResults?[indexPath.row] {
+            do {
+                try realm.write {
+                    item.done = !item.done
+                }
+            } catch {
+                print("There was an error updating the item. \(error)")
+            }
+        }
         
-        //saveItems()
-        
+        tableView.reloadData()
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
